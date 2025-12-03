@@ -89,6 +89,8 @@ class BrandController extends Controller
         $request->validate([
             'name' => 'required|max:255|unique:brands,name,'.$brand->id,
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ],[
+        'name.unique' => 'Thương hiệu này đã tồn tại!',
         ]);
 
         $data = [

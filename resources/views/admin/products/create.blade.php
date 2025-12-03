@@ -10,10 +10,12 @@
                 <div class="col-md-6 form-group">
                     <label>Tên Sản phẩm</label>
                     <input type="text" name="name" class="form-control" required>
+                    @error('name') <small class="text-danger">{{ $message }}</small> @enderror
                 </div>
                 <div class="col-md-6 form-group">
                     <label>Mã SKU</label>
                     <input type="text" name="sku" class="form-control">
+                    @error('sku') <small class="text-danger">{{ $message }}</small> @enderror
                 </div>
             </div>
             

@@ -9,6 +9,7 @@
             <div class="form-group">
                 <label>Tên Thương hiệu</label>
                 <input type="text" name="name" class="form-control" required>
+                @error('name') <small class="text-danger">{{ $message }}</small> @enderror
             </div>
             <div class="form-group">
                 <label>Logo</label>

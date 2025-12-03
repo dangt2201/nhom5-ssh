@@ -31,12 +31,16 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|max:255|unique:products,name',
+            'sku'  => 'nullable|unique:products,sku',
             'price' => 'required|numeric',
             'category_id' => 'required',
             'brand_id' => 'required',
             'img_thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+        ], [
+        'name.unique' => 'Tên sản phẩm này đã tồn tại!',
+        'sku.unique' => 'Mã SKU này đã tồn tại!',
+         ]);
 
         $data = $request->all();
         $data['slug'] = Str::slug($request->name); // Tạo slug tự động
@@ -50,9 +54,10 @@ class ProductController extends Controller
             $data['img_thumbnail'] = 'uploads/products/' . $filename;
         }
 
-        Product::create($data);
+        $product = Product::create($data);
 
-        return redirect()->route('products.index')->with('success', 'Thêm sản phẩm thành công!');
+        return redirect()->route('products.edit', $product->id)
+                         ->with('success', 'Đã tạo sản phẩm! Hãy thêm Size và Màu bên dưới.');
     }
 
     // 4. Form sửa
@@ -70,8 +75,12 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|max:255|unique:products,name,'.$id,
+            'sku'  => 'nullable|unique:products,sku,'.$id,
             'price' => 'required|numeric',
+        ], [
+        'name.unique' => 'Tên sản phẩm này đã tồn tại!',
+        'sku.unique' => 'Mã SKU này đã trùng với sản phẩm khác!',
         ]);
 
         $data = $request->all();

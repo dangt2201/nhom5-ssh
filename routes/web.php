@@ -11,6 +11,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\Admin\BrandController as AdminBrandController;
 use App\Http\Controllers\Admin\InventoryController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ProductVariantController;
 
 Route::get('/', function () {
     return view('home');
@@ -32,6 +33,14 @@ Route::middleware(['auth', CheckAdmin::class])->prefix('admin')->group(function 
 
     // Route quản lý Brand
     Route::resource('brands', AdminBrandController::class);
+
+    // Thêm biến thể cho sản phẩm cụ thể
+    Route::post('products/{product}/variants', [ProductVariantController::class, 'store'])->name('product_variants.store');
+
+    // Xóa biến thể
+    Route::delete('variants/{variant}', [ProductVariantController::class, 'destroy'])->name('product_variants.destroy');   
+    // Route xem danh sách tồn kho toàn hệ thống
+    Route::get('variants', [ProductVariantController::class, 'index'])->name('product_variants.index');
 
 });
 Route::get('/login', [LoginController::class, 'showLoginRegister'])->name('login');

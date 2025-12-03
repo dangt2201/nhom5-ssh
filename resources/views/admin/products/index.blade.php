@@ -49,3 +49,28 @@
     </div>
 </div>
 @endsection
+@section('scripts')
+<script>
+    // SweetAlert cho nút xóa
+    $(document).on('click', '.btn-delete', function(e) {
+        let form = $(this).closest('form');
+        Swal.fire({
+            title: 'Xóa danh mục này?',
+            text: "Sản phẩm thuộc danh mục này cũng có thể bị ảnh hưởng!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            confirmButtonText: 'Xóa ngay',
+            cancelButtonText: 'Hủy'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
+        })
+    });
+
+    @if(session('success'))
+        Swal.fire('Thành công!', "{{ session('success') }}", 'success');
+    @endif
+</script>
+@endsection
