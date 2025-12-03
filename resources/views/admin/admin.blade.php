@@ -9,7 +9,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/startbootstrap-sb-admin-2@4.1.4/css/sb-admin-2.min.css" rel="stylesheet">
-    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         .bg-gradient-primary { background-color: #4e73df; background-image: linear-gradient(180deg,#4e73df 10%,#224abe 100%); }
     </style>
@@ -32,11 +32,11 @@
             </li>
             <hr class="sidebar-divider">
             <div class="sidebar-heading">Kinh doanh</div>
-            <li class="nav-item">
-                <a class="nav-link" href="/admin/categories"><i class="fas fa-fw fa-folder"></i><span>Danh mục & Hãng</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('products.index') }}"><i class="fas fa-fw fa-box"></i><span>Quản lý Sản phẩm</span></a>
+           <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.inventory') }}">
+                    <i class="fas fa-fw fa-boxes"></i>
+                    <span>Quản lý Kho Hàng</span>
+                </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/admin/orders"><i class="fas fa-fw fa-shopping-cart"></i><span>Đơn hàng</span></a>
